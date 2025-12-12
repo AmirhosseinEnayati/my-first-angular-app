@@ -1,9 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
-
-const users = [
-  { name: 'amirhossein', avatar: 'user_amirhossein.jpg' },
-  { name: 'jennifer', avatar: 'user_jennifer.jpg' },
-];
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-user',
@@ -12,11 +7,12 @@ const users = [
   styleUrl: './user.css',
 })
 export class User {
-  selectedUser = signal(users[0]);
-  imagePath = computed(()=>'assets/users/' + this.selectedUser().avatar);
+  @Input() avatar!: string;
+  @Input() name!: string;
 
-  onSelectUser() {
-    let randomIndex = Math.floor(Math.random() * users.length);
-    this.selectedUser.set(users[randomIndex]);
+  get imagePath() {
+    return 'assets/users/' + this.avatar;
   }
+
+  onSelectUser() {}
 }
