@@ -17,9 +17,9 @@ export class App {
     { id: 'u2', name: 'jennifer', avatar: 'user_jennifer.jpg' },
   ];
 
-  selectedId = this.users[0].id;
+  selectedId?: string;
 
-  get selectedUser() { console.log(this.users.find((x) => x.id === this.selectedId));
+  get selectedUser() {
     return this.users.find((x) => x.id == this.selectedId)!;
   }
 
