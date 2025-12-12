@@ -10,7 +10,7 @@ export class User {
   @Input() id!: string;
   @Input() avatar!: string;
   @Input() name!: string;
-  @Output() select = new EventEmitter();
+  @Output() select = new EventEmitter<string>();
 
   get imagePath() {
     return 'assets/users/' + this.avatar;
