@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 
 const users = [
   { name: 'amirhossein', avatar: 'user_amirhossein.jpg' },
@@ -12,14 +12,11 @@ const users = [
   styleUrl: './user.css',
 })
 export class User {
-  selectedUser = users[0];
-
-  get imagePath(): string {
-    return 'assets/users/' + this.selectedUser.avatar;
-  }
+  selectedUser = signal(users[0]);
+  imagePath = computed(()=>'assets/users/' + this.selectedUser().avatar);
 
   onSelectUser() {
     let randomIndex = Math.floor(Math.random() * users.length);
-    this.selectedUser = users[randomIndex];
+    this.selectedUser.set(users[randomIndex]);
   }
 }
