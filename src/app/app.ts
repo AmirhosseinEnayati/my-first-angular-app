@@ -10,9 +10,13 @@ import { User } from './user/user';
 })
 export class App {
   users = [
-    { name: 'amirhossein', avatar: 'user_amirhossein.jpg' },
-    { name: 'jennifer', avatar: 'user_jennifer.jpg' },
+    { id: 'u1', name: 'amirhossein', avatar: 'user_amirhossein.jpg' },
+    { id: 'u2', name: 'jennifer', avatar: 'user_jennifer.jpg' },
   ];
 
   protected readonly title = signal('my-first-angular-app');
+
+  onSelectUser(id: string) {
+    console.log('selected User:' + id);
+  }
 }
