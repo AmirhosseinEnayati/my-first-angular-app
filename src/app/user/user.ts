@@ -9,6 +9,7 @@ import { userModel } from './user.model';
 })
 export class User {
   @Input({ required: true }) user!: userModel;
+  @Input({ required: true }) isSelected!: boolean;
 
   @Output() select = new EventEmitter<string>();
 
