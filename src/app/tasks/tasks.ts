@@ -69,9 +69,12 @@ export class Tasks {
     },
   ];
 
-  
+
   get selectedUserTasks() {
-    return this.userTasks.filter(x=>x.userId == this.userId)
+    return this.userTasks.filter((x) => x.userId == this.userId);
   }
-  
+
+  onCompleteTask(id: number) {
+    this.userTasks = this.userTasks.filter((x) => x.id !== id);
+  }
 }
