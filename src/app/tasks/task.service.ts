@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { newTaskModel } from './task/task.model';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class TaskService {
   private tasks = [
     {
@@ -62,6 +62,13 @@ export class TaskService {
     },
   ];
 
+  constructor() {
+    var tasksInLocalStorage = localStorage.getItem('tasks');
+    if (tasksInLocalStorage) {
+      this.tasks = JSON.parse(tasksInLocalStorage);
+    }
+  }
+
   addTask(taskModel: newTaskModel, userId: string) {
     this.tasks.unshift({
       id: this.tasks[this.tasks.length - 1].id + 1,
@@ -70,6 +77,7 @@ export class TaskService {
       title: taskModel.title,
       userId: userId,
     });
+    this.saveTasks();
   }
 
   getTasks(userId: string) {
@@ -77,6 +85,11 @@ export class TaskService {
   }
 
   removeTask(id: number) {
-     this.tasks = this.tasks.filter((task) => task.id !== id);
+    this.tasks = this.tasks.filter((task) => task.id !== id);
+    this.saveTasks();
+  }
+
+  saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(this.tasks));
   }
 }
