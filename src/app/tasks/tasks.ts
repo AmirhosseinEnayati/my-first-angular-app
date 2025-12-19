@@ -1,13 +1,11 @@
 import { Component, inject, Input } from '@angular/core';
-import { Task } from './task/task';
-import { NewTask } from './new-task/new-task';
 import { TaskService } from './task.service';
 
 @Component({
   selector: 'app-tasks',
-  imports: [Task, NewTask],
   templateUrl: './tasks.html',
   styleUrl: './tasks.css',
+  standalone: false,
 })
 export class Tasks {
   @Input({ required: true }) userId!: string;
@@ -16,7 +14,6 @@ export class Tasks {
   private taskService = inject(TaskService);
 
   isAddingTask = false;
-
 
   get selectedUserTasks() {
     return this.taskService.getTasks(this.userId);
